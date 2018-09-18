@@ -160,7 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maras0830\BattleNetApi\Providers\ApiServiceProvider::class,
-
+        Xklusive\BattlenetApi\BattlenetApiServiceProvider::class,
+        App\Providers\BattleNetServiceProvider::class,
     ],
 
     /*

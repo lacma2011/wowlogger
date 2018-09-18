@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f868b1c364be3b5bc2ace9ddb9bae1d",
+    "content-hash": "4fb8aa61871ef5a894e31caa03b260d3",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -3199,6 +3199,63 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "xklusive/laravel-battlenet-api",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xklusive/laravel-battlenet-api.git",
+                "reference": "0721828cc47b4120da2fe30c7738fa60ebdd055c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xklusive/laravel-battlenet-api/zipball/0721828cc47b4120da2fe30c7738fa60ebdd055c",
+                "reference": "0721828cc47b4120da2fe30c7738fa60ebdd055c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2",
+                "illuminate/contracts": "^5.5",
+                "laravel/framework": "^5.5",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.1.4",
+                "phpunit/phpunit": "~6.0",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xklusive\\BattlenetApi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guillaume Meheust",
+                    "email": "xklusive91@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dániel Hagyárossy",
+                    "email": "d.hagyarossy@sapstar.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5 client for Battle.net API",
+            "homepage": "https://github.com/xklusive/laravel-battlenet-api",
+            "keywords": [
+                "api",
+                "battle.net",
+                "battlenet",
+                "laravel"
+            ],
+            "time": "2017-12-07T07:54:35+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
