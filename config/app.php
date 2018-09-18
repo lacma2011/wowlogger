@@ -159,6 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maras0830\BattleNetApi\Providers\ApiServiceProvider::class,
 
     ],
 
@@ -209,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'BattleNetApi' => Maras0830\BattleNetApi\Facades\ApiServiceFacade::class,
     ],
 
 ];

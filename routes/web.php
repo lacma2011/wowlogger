@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('hello', function () {
+    return "hello";
+});
+
+Route::get('battlenet', 'Auth\OAuthController@redirectToProvider_BattleNet');
+Route::get('battlenet/callback', 'Auth\OAuthController@handleProviderCallback_BattleNet');
