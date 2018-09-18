@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fb8aa61871ef5a894e31caa03b260d3",
+    "content-hash": "114805903bec6e48e22100d0adde71a8",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1401,46 +1401,6 @@
                 "server"
             ],
             "time": "2018-06-23T16:57:59+00:00"
-        },
-        {
-            "name": "maras0830/laravel5-battlenet-api",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Maras0830/laravel5-battlenet-api.git",
-                "reference": "6c3de044432c6e20e20252c5f29a10347286113a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Maras0830/laravel5-battlenet-api/zipball/6c3de044432c6e20e20252c5f29a10347286113a",
-                "reference": "6c3de044432c6e20e20252c5f29a10347286113a",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Maras0830\\BattleNetApi\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maras Chen",
-                    "email": "Maras0830@gmail.com"
-                }
-            ],
-            "description": "Laravel5 BattleNet Api",
-            "keywords": [
-                "battlenet",
-                "laravel"
-            ],
-            "time": "2017-10-19T03:02:46+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5022,9 +4982,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "maras0830/laravel5-battlenet-api": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

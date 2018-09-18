@@ -19,5 +19,5 @@ Route::get('hello', function () {
     return "hello";
 });
 
-Route::get('battlenet', 'Auth\OAuthController@redirectToProvider_BattleNet');
-Route::get('battlenet/callback', 'Auth\OAuthController@handleProviderCallback_BattleNet');
+Route::get('socialite/{provider}', 'Auth\OAuthController@login');
+Route::get('socialite/callback/{provider}', 'Auth\OAuthController@redirect');
