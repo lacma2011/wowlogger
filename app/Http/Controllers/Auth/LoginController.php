@@ -8,28 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use App\Traits\RedirectsHome;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
+    use RedirectsHome;
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
     /**
         * Create a new controller instance.
@@ -49,7 +34,14 @@ class LoginController extends Controller
       */
     public function redirectToProvider($provider)
     {
-        echo "OK";exit;
+        
+        // socialite enabled providers
+        $enabled_providers = explode(',', env('SOCIALITE_PROVIDERS'));
+        if (! in_array($provider, $enabled_providers)) {
+            throw new Exception('That provider is not available');
+        }
+
+
 //TODO: check config for region
         return Socialite::driver($provider)
                 ->scopes('wow.profile')
@@ -90,7 +82,7 @@ class LoginController extends Controller
         $authUser = $this->findOrCreateUser($user, $provider);
 
         Auth::login($authUser, true);
-        return redirect($this->redirectTo);
+        return $this->redirectHome();
     }
 
     /**
