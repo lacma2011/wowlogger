@@ -35,4 +35,19 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+
+    //Soialite providers
+    //--------------
+    'battlenet' => [
+        'client_id' => env('Battle_net_client_id'),
+        'client_secret' => env('Battle_net_client_secret'),
+        'redirect' => env('APP_URL') . '/' . env('Battle_net_redirect_url'),
+
+        // extra -- battle.net has multiple authentication endpoints by region!
+        'region' => env('Battle_net_region'),
+        'scopes' => 'wow.profile',
+    ]
+
+    //end Socialite providers
+    //------------------
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fb8aa61871ef5a894e31caa03b260d3",
+    "content-hash": "7dfa19ae52ddb9b9fa45b054882a9fdc",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1403,46 +1403,6 @@
             "time": "2018-06-23T16:57:59+00:00"
         },
         {
-            "name": "maras0830/laravel5-battlenet-api",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Maras0830/laravel5-battlenet-api.git",
-                "reference": "6c3de044432c6e20e20252c5f29a10347286113a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Maras0830/laravel5-battlenet-api/zipball/6c3de044432c6e20e20252c5f29a10347286113a",
-                "reference": "6c3de044432c6e20e20252c5f29a10347286113a",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Maras0830\\BattleNetApi\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maras Chen",
-                    "email": "Maras0830@gmail.com"
-                }
-            ],
-            "description": "Laravel5 BattleNet Api",
-            "keywords": [
-                "battlenet",
-                "laravel"
-            ],
-            "time": "2017-10-19T03:02:46+00:00"
-        },
-        {
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
@@ -2110,6 +2070,92 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "socialiteproviders/battlenet",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Battle.net.git",
+                "reference": "ee08a2518afe6b7144c277eb72d53cc2da92238e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Battle.net/zipball/ee08a2518afe6b7144c277eb72d53cc2da92238e",
+                "reference": "ee08a2518afe6b7144c277eb72d53cc2da92238e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~2.0 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Battlenet\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anand Capur",
+                    "email": "github@anand.io"
+                }
+            ],
+            "description": "Battlenet OAuth2 Provider for Laravel Socialite",
+            "time": "2018-06-26T05:38:13+00:00"
+        },
+        {
+            "name": "socialiteproviders/manager",
+            "version": "v3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "1de3f3d874392da6f1a4c0bf30d843e9cd903ea7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/1de3f3d874392da6f1a4c0bf30d843e9cd903ea7",
+                "reference": "1de3f3d874392da6f1a4c0bf30d843e9cd903ea7",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/socialite": "~3.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SocialiteProviders\\Manager\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Manager\\": "src/",
+                    "SocialiteProviders\\Manager\\Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wendt",
+                    "email": "andy@awendt.com"
+                }
+            ],
+            "description": "Easily add new or override built-in providers in Laravel Socialite.",
+            "time": "2017-11-20T08:42:57+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5022,9 +5068,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "maras0830/laravel5-battlenet-api": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
