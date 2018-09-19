@@ -19,5 +19,5 @@ Route::get('hello', function () {
     return "hello";
 });
 
-Route::get('socialite/{provider}', 'Auth\OAuthController@login');
-Route::get('socialite/callback/{provider}', 'Auth\OAuthController@redirect');
+Route::get('socialite/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('socialite/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
