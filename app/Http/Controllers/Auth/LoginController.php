@@ -32,20 +32,22 @@ class LoginController extends Controller
       *
       * @return Response
       */
-    public function redirectToProvider($provider)
+    public function redirectToProvider($provider, $region = NULL)
     {
-        
         // socialite enabled providers
         $enabled_providers = explode(',', env('SOCIALITE_PROVIDERS'));
         if (! in_array($provider, $enabled_providers)) {
             throw new Exception('That provider is not available');
         }
-
-
-//TODO: check config for region
-        return Socialite::driver($provider)
-                ->scopes('wow.profile')
-                ->redirect();
+        
+        $socialite = Socialite::driver($provider)
+                ->scopes('wow.profile');
+        $socialite->redirect()->getTargetUrl();
+        // if not using region default in .env...
+        if (NULL !== $region) {
+            $socialite->setRegion($region);
+        }
+        return $socialite->redirect();
     }
 
     /**
