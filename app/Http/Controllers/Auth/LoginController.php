@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Traits\RedirectsHome;
+use App\Services\BattleNet;
 
 class LoginController extends Controller
 {
@@ -28,35 +29,43 @@ class LoginController extends Controller
 
 
     /**
-      * Redirect the user to the OAuth Provider.
-      *
-      * @return Response
-      */
-    public function redirectToProvider($provider)
+     * 
+     * @param string $provider
+     * @param string $region
+     * @return Response
+     * @throws Exception
+     */
+    public function redirectToProvider(string $provider, string $region = NULL)
     {
-        
         // socialite enabled providers
         $enabled_providers = explode(',', env('SOCIALITE_PROVIDERS'));
         if (! in_array($provider, $enabled_providers)) {
-            throw new Exception('That provider is not available');
+            throw new \Exception('That provider is not available');
+        }
+        
+        $socialite = Socialite::driver($provider)
+                ->scopes('wow.profile');
+        $socialite->withRegion($region); // for OAuth2 state
+        // if not using region default in .env...
+        if (NULL !== $region) {
+            // for the API endpoint
+            $socialite->setRegion($region);
         }
 
-
-//TODO: check config for region
-        return Socialite::driver($provider)
-                ->scopes('wow.profile')
-                ->redirect();
+        return $socialite->redirect();
     }
 
     /**
-            * Obtain the user information from provider.  Check if the user already exists in our
-            * database by looking up their provider_id in the database.
-            * If the user exists, log them in. Otherwise, create a new user then log them in. After that 
-            * redirect them to the authenticated users homepage.
-            *
-            * @return Response
-            */
-    public function handleProviderCallback(Request $request, $provider)
+    * Obtain the user information from provider.  Check if the user already exists in our
+    * database by looking up their provider_id in the database.
+    * If the user exists, log them in. Otherwise, create a new user then log them in. After that 
+    * redirect them to the authenticated users homepage.
+    *
+     * @param Request $request
+     * @param string $provider OAuth2 provider
+     * @return Response
+     */
+    public function handleProviderCallback(Request $request, String $provider)
     {
         // check if user didnt finish
         if (TRUE == TRUE) {
@@ -76,11 +85,8 @@ class LoginController extends Controller
             }
         }
 
-        $user = Socialite::driver($provider)->user();
-
-//TODO: include region that user selected for redirectToProvider()
-        $authUser = $this->findOrCreateUser($user, $provider);
-
+        $socialite_user = Socialite::driver($provider)->user();
+        $authUser = $this->findOrCreateUser($socialite_user, $provider);
         Auth::login($authUser, true);
         return $this->redirectHome();
     }
@@ -94,9 +100,13 @@ class LoginController extends Controller
             */
     public function findOrCreateUser($user, $provider)
     {
+        // TODO: regions us, eu, apac can share the same ID's, but cn cannot.
+        // For now, a us user can create a new account by logging in as eu, since battlenet allows login from either.
+
         $authUser = \App\User::where([
             ['provider_id', '=', $user->id],
-            ['provider', '=', $provider]
+            ['provider', '=', $provider],
+            ['battlenet_region', '=', $user->region],
         ])->first();
 
         if ($authUser) {
@@ -107,7 +117,8 @@ class LoginController extends Controller
             'name'     => !$user->name && property_exists($user, 'nickname') ? $user->nickname : $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
+            'battlenet_region' => $user->region,
         ]);
     }
 

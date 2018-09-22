@@ -16,7 +16,7 @@ trait RedirectsHome
         }
         return redirect()->route('myhome',['user_id'=>$user->id]);
     }
-    
+
     public function printHome()
     {
         $user = Auth::user();

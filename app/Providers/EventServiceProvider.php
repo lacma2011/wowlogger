@@ -17,7 +17,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EventListener',
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            'SocialiteProviders\Battlenet\BattlenetExtendSocialite@handle'
+            'SocialiteProviders\Battlenet\BattlenetExtendSocialite@handle',
+            'Lacma2011\SocialiteProviders\BattlenetState\BattlenetSocialiteExpandState@handle'
         ],
     ];
 
