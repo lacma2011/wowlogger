@@ -100,14 +100,24 @@ class LoginController extends Controller
             */
     public function findOrCreateUser($user, $provider)
     {
-        // TODO: regions us, eu, apac can share the same ID's, but cn cannot.
-        // For now, a us user can create a new account by logging in as eu, since battlenet allows login from either.
-
+        $region = strtolower($user->region);
         $authUser = \App\User::where([
             ['provider_id', '=', $user->id],
             ['provider', '=', $provider],
-            ['battlenet_region', '=', $user->region],
-        ])->first();
+        ]);
+
+        // difference in logging in between cn and us/eu/apac regions:
+        if ($region === 'cn') {
+            $authUser = $authUser->where(['battlenet_region', '=', $region])
+                    ->first();
+        } else {
+            // all other regions share the same battlenet group so technically they can log in from any of those regions
+            $authUser = $authUser->where(function ($query) {
+                $query->where('battlenet_region', '=', 'us')
+                      ->orWhere('battlenet_region', '=', 'eu')
+                      ->orWhere('battlenet_region', '=', 'apac');
+            })->first();
+        }
 
         if ($authUser) {
             return $authUser;
@@ -118,7 +128,7 @@ class LoginController extends Controller
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id,
-            'battlenet_region' => $user->region,
+            'battlenet_region' => $region,
         ]);
     }
 
