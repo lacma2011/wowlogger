@@ -38,7 +38,7 @@ return [
 
     //Soialite providers
     //--------------
-    'battlenet' => [
+    'battlenet-stateful' => [
         'client_id' => env('Battle_net_client_id'),
         'client_secret' => env('Battle_net_client_secret'),
         'redirect' => env('APP_URL') . '/' . env('Battle_net_redirect_url'),

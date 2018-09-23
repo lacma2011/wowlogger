@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dfa19ae52ddb9b9fa45b054882a9fdc",
+    "content-hash": "0c3af5157ac6e82d68464172c8cce609",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -742,6 +742,47 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "lacma2011/socialiteproviders",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lacma2011/socialiteproviders.git",
+                "reference": "9bf9d5b3ca17230bb9a08b2200ec69365a063461"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lacma2011/socialiteproviders/zipball/9bf9d5b3ca17230bb9a08b2200ec69365a063461",
+                "reference": "9bf9d5b3ca17230bb9a08b2200ec69365a063461",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/battlenet": "~1.0 || ~2.0 || ~3.0",
+                "socialiteproviders/manager": "~2.0 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lacma2011\\SocialiteProviders\\BattlenetState\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "p. jerome bordallo",
+                    "email": "github@lacma2011"
+                }
+            ],
+            "description": "Battlenet OAuth2 Provider for Laravel Socialite, with region in state",
+            "support": {
+                "source": "https://github.com/lacma2011/socialiteproviders/tree/master",
+                "issues": "https://github.com/lacma2011/socialiteproviders/issues"
+            },
+            "time": "2018-09-21T22:58:30+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1535,16 +1576,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
                 "shasum": ""
             },
             "require": {
@@ -1582,7 +1623,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-07-15T17:25:16+00:00"
+            "time": "2018-09-18T07:03:24+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3248,16 +3289,16 @@
         },
         {
             "name": "xklusive/laravel-battlenet-api",
-            "version": "v1.0.1",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xklusive/laravel-battlenet-api.git",
-                "reference": "0721828cc47b4120da2fe30c7738fa60ebdd055c"
+                "reference": "57b2d44abb035db6c2cde649738ea4569e2ec638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xklusive/laravel-battlenet-api/zipball/0721828cc47b4120da2fe30c7738fa60ebdd055c",
-                "reference": "0721828cc47b4120da2fe30c7738fa60ebdd055c",
+                "url": "https://api.github.com/repos/xklusive/laravel-battlenet-api/zipball/57b2d44abb035db6c2cde649738ea4569e2ec638",
+                "reference": "57b2d44abb035db6c2cde649738ea4569e2ec638",
                 "shasum": ""
             },
             "require": {
@@ -3301,7 +3342,7 @@
                 "battlenet",
                 "laravel"
             ],
-            "time": "2017-12-07T07:54:35+00:00"
+            "time": "2018-09-21T09:13:27+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
