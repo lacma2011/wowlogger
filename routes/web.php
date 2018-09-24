@@ -12,9 +12,11 @@
 */
 Auth::routes();
 
-Route::get('/', 'Controller@user')->name('home');
+Route::get('/', 'Controller@home')->name('home');
 
 Route::get('socialite/{provider}/{region?}', 'Auth\LoginController@redirectToProvider')->name('loginsocial');
 Route::get('callback/socialite/{provider}', 'Auth\LoginController@handleProviderCallback');
 
 Route::get(config('fish.routes.user_root') . '/{user_id}', 'Controller@user')->name('myhome');
+
+Route::post(config('fish.routes.user_root') . '/{user_id}', 'Controller@userPost')->name('myhome_post');

@@ -81,5 +81,8 @@ exit;
         return $this->cache($request, $options, __FUNCTION__);
     }
 
+    public function updateCharacters() {
+        
+    }
 
 }

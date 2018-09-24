@@ -8,22 +8,45 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\User;
 use App\Traits\LoginLinker;
+use App\Services\BattleNet;
+use Illuminate\Http\Request;
+use Auth;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, LoginLinker;
+
+    /*
+     * home page
+     */
+    public function home()
+    {
+        return $this->printLoginLink();
+    }
     
     /*
      * User's home page
      */
-    public function user(User $user, $user_id = NULL)
+    public function user(User $user, $user_id)
     {
-        $return = '';
-        if (NULL !== $user_id) {
-            $u = $user->find($user_id);            
-            $return .= "this is user {$u->name}'s page. ";
-        }
 
-        return $return . $this->printLoginLink();
+        $u = $user->find($user_id);
+        $logged_in = Auth::user();
+
+        // TODO: Get Characters
+        
+        return view('user', [
+            'user' => $u,
+            'logged_in' => $logged_in,
+            'login_link' => $this->printLoginLink(),
+        ]);
+    }
+    
+    public function userPost(BattleNet $bnet, Request $request)
+    {
+        $user = Auth::user();
+        $token = $request->session()->get('access_token');
+        $bnet->getCurrentUser($token);
+        
     }
 }
