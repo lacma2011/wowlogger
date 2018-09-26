@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Traits\RedirectsHome;
-use App\Services\BattleNet;
 
 class LoginController extends Controller
 {
@@ -86,6 +85,7 @@ class LoginController extends Controller
         }
 
         $socialite_user = Socialite::driver($provider)->user();
+        $request->session()->put('access_token', $socialite_user->token);
         $authUser = $this->findOrCreateUser($socialite_user, $provider);
         Auth::login($authUser, true);
         return $this->redirectHome();

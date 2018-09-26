@@ -4,6 +4,8 @@ namespace App\Services;
 //TODO: ability to change API region
 use Xklusive\BattlenetApi\BattlenetHttpClient;
 use GuzzleHttp\Client;
+use App\User;
+use App\Models\Character;
 
 /**
  * @author Jerome Bordallo <bubbam2006@gmail.com>
@@ -52,7 +54,7 @@ class BattleNet extends BattlenetHttpClient
 
         $response = $client->request('POST', 'https://'.config('battlenet-api.region') . '.battle.net/oauth/check_token', $options);
         $response = json_decode($response->getBody()->getContents(), true);
-        print_r($response);
+        var_dump($response);
 
         $options = [
             'query' => [
@@ -64,7 +66,7 @@ class BattleNet extends BattlenetHttpClient
         ];
         $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.api.battle.net/wow/user/characters', $options);
         $response = json_decode($response->getBody()->getContents(), true);
-        print_r($response);
+        var_dump($response);
 
 exit;
 
@@ -81,5 +83,51 @@ exit;
         return $this->cache($request, $options, __FUNCTION__);
     }
 
+    /**
+     * 
+     * @param string $accessToken access token
+     */
+    public function updateCharacters($accessToken, $user_id) {
 
+        $characters = User::find($user_id)->characters()->get();
+        
+        $client = new Client([
+            'base_uri' => 'us.battle.net',
+        ]);
+
+        $options = [
+            'query' => [
+                'access_token' => $accessToken,
+                'client_id' => config('battlenet-api.client_id'),
+                'client_secret' => config('battlenet-api.client_secret'),
+                'redirect_uri' => config('battlenet-api.redirect_url'),
+            ],
+        ];
+        $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.api.battle.net/wow/user/characters', $options);
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        $added = 0;
+        foreach ($data['characters'] as $d) {
+            $found = FALSE;
+            foreach($characters as $c) {
+                if ($c->name === $d['name'] && $c->realm === $d['realm']) {
+                    $found = TRUE;
+                    break;
+                }
+            }
+            if (!$found) {
+                $char = new Character();
+                $char->name = $d['name'];
+                $char->realm = $d['realm'];
+                $char->user_id = $user_id;
+                $char->race = $d['race'];
+                $char->class = $d['class'];
+                $char->level = $d['level'];
+                $char->save();
+                $added++;
+            }
+        }
+        
+        return $added;
+    }
 }
