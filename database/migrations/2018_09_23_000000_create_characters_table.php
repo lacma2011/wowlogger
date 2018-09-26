@@ -14,11 +14,15 @@ class CreateCharactersTable extends Migration
     public function up()
     {
         Schema::create('characters', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('character_id');
-            $table->int('realm_id');
+            $table->string('realm');
+            $table->integer('race');
+            $table->integer('class');
+            $table->integer('level');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +33,6 @@ class CreateCharactersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('characters');
     }
 }

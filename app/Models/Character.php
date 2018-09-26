@@ -1,10 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Character
+class Character extends Model
 {
+    
 
     /**
      * The attributes that are mass assignable.
@@ -12,7 +14,7 @@ class Character
      * @var array
      */
     protected $fillable = [
-        'name', 'character_id', 'realm_id', 'user_id',
+        'name', 'realm', 'user_id', 'race', 'class', 'level',
     ];
 
     /**

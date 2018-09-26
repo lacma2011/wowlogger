@@ -46,7 +46,9 @@ class Controller extends BaseController
     {
         $user = Auth::user();
         $token = $request->session()->get('access_token');
-        $bnet->getCurrentUser($token);
-        
+        if (!empty($request->input('update'))) {
+            $added = $bnet->updateCharacters($token, $user->id);
+            return $added . " characters added.";
+        }
     }
 }
