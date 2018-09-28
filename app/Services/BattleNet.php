@@ -87,7 +87,7 @@ exit;
      * 
      * @param string $accessToken access token
      */
-    public function updateCharacters($accessToken, $user_id) {
+    public function updateCharacters($accessToken, $user_id, $region) {
 
         $characters = User::find($user_id)->characters()->get();
         
@@ -103,13 +103,19 @@ exit;
                 'redirect_uri' => config('battlenet-api.redirect_url'),
             ],
         ];
-        $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.api.battle.net/wow/user/characters', $options);
+        if ($region === 'cn') {
+            // untested. Need cn account, and to know API endpoint for cn.
+            $response = $client->request('GET', 'https://' . $region . '.api.battle.net/wow/user/characters', $options);
+        } else {
+            $response = $client->request('GET', 'https://' . $region . '.api.battle.net/wow/user/characters', $options);
+        }
+
         $data = json_decode($response->getBody()->getContents(), true);
 
         $added = 0;
         foreach ($data['characters'] as $d) {
             $found = FALSE;
-            foreach($characters as $c) {
+            foreach($characters as $c) {                
                 if ($c->name === $d['name'] && $c->realm === $d['realm']) {
                     $found = TRUE;
                     break;
@@ -123,6 +129,7 @@ exit;
                 $char->race = $d['race'];
                 $char->class = $d['class'];
                 $char->level = $d['level'];
+                $char->region = $region;
                 $char->save();
                 $added++;
             }

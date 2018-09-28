@@ -33,8 +33,6 @@ class Controller extends BaseController
         $u = $user->find($user_id);
         $logged_in = Auth::user();
 
-        // TODO: Get Characters
-        
         return view('user', [
             'user' => $u,
             'logged_in' => $logged_in,
@@ -45,9 +43,10 @@ class Controller extends BaseController
     public function userPost(BattleNet $bnet, Request $request)
     {
         $user = Auth::user();
+        $region = $request->input('region');
         $token = $request->session()->get('access_token');
         if (!empty($request->input('update'))) {
-            $added = $bnet->updateCharacters($token, $user->id);
+            $added = $bnet->updateCharacters($token, $user->id, $region);
             return $added . " characters added.";
         }
     }
