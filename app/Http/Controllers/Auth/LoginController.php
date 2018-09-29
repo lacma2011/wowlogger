@@ -108,14 +108,14 @@ class LoginController extends Controller
 
         // difference in logging in between cn and us/eu/apac regions:
         if ($region === 'cn') {
-            $authUser = $authUser->where(['battlenet_region', '=', $region])
+            $authUser = $authUser->where(['battlenet_region_default', '=', $region])
                     ->first();
         } else {
             // all other regions share the same battlenet group so technically they can log in from any of those regions
             $authUser = $authUser->where(function ($query) {
-                $query->where('battlenet_region', '=', 'us')
-                      ->orWhere('battlenet_region', '=', 'eu')
-                      ->orWhere('battlenet_region', '=', 'apac');
+                $query->where('battlenet_region_default', '=', 'us')
+                      ->orWhere('battlenet_region_default', '=', 'eu')
+                      ->orWhere('battlenet_region_default', '=', 'apac');
             })->first();
         }
 
@@ -128,7 +128,7 @@ class LoginController extends Controller
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id,
-            'battlenet_region' => $region,
+            'battlenet_region_default' => $region,
         ]);
     }
 
