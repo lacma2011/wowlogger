@@ -22,6 +22,7 @@ class CreateCharactersTable extends Migration
             $table->integer('level');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('region');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('provider');
             $table->string('provider_id');
-            $table->string('battlenet_region');
+            $table->string('battlenet_region_default');
             $table->rememberToken();
             $table->timestamps();
         });
