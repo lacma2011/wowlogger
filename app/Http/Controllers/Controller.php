@@ -23,7 +23,7 @@ class Controller extends BaseController
     {
         return $this->printLoginLink();
     }
-    
+
     /*
      * User's home page
      */
@@ -39,7 +39,7 @@ class Controller extends BaseController
             'login_link' => $this->printLoginLink(),
         ]);
     }
-    
+
     public function userPost(BattleNet $bnet, Request $request)
     {
         $user = Auth::user();

@@ -64,7 +64,7 @@ class BattleNet extends BattlenetHttpClient
                 'redirect_uri' => config('battlenet-api.redirect_url'),
             ],
         ];
-        $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.api.battle.net/wow/user/characters', $options);
+        $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.battle.net/wow/user/characters', $options);
         $response = json_decode($response->getBody()->getContents(), true);
         var_dump($response);
 
@@ -98,16 +98,13 @@ exit;
         $options = [
             'query' => [
                 'access_token' => $accessToken,
-                'client_id' => config('battlenet-api.client_id'),
-                'client_secret' => config('battlenet-api.client_secret'),
-                'redirect_uri' => config('battlenet-api.redirect_url'),
             ],
         ];
         if ($region === 'cn') {
             // untested. Need cn account, and to know API endpoint for cn.
             $response = $client->request('GET', 'https://' . $region . '.api.battle.net/wow/user/characters', $options);
         } else {
-            $response = $client->request('GET', 'https://' . $region . '.api.battle.net/wow/user/characters', $options);
+            $response = $client->request('GET', 'https://' . $region . '.api.blizzard.com/wow/user/characters', $options);
         }
 
         $data = json_decode($response->getBody()->getContents(), true);
