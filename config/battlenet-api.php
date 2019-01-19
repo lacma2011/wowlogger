@@ -13,7 +13,7 @@ return [
     'api_url_cn' => "https://api.battle.com.cn/",
     'client_id' => env('Battle_net_client_id', ''),
     'client_secret' => env('Battle_net_client_secret', ''),
-    'redirect_url' => env('APP_URL') . env('Battle_net_redirect_url', ''),
+    'redirect_url' => env('APP_URL') . env('Battle_net_redirect_url', ''), //unused ?
     'scopes' => [
         'wow.profile',
         'sc2.profile'

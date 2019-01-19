@@ -59,9 +59,9 @@ class BattleNet extends BattlenetHttpClient
         $options = [
             'query' => [
                 'access_token' => $accessToken,
-                'client_id' => config('battlenet-api.client_id'),
-                'client_secret' => config('battlenet-api.client_secret'),
-                'redirect_uri' => config('battlenet-api.redirect_url'),
+//                'client_id' => config('battlenet-api.client_id'),
+//                'client_secret' => config('battlenet-api.client_secret'),
+//                'redirect_uri' => config('battlenet-api.redirect_url'),
             ],
         ];
         $response = $client->request('GET', 'https://'.config('battlenet-api.region') . '.battle.net/wow/user/characters', $options);
