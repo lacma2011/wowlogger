@@ -46,8 +46,15 @@ return [
         // extra -- battle.net has multiple authentication endpoints by region!
         'region' => env('Battle_net_region'),
         'scopes' => 'wow.profile',
-    ]
-
+    ],
     //end Socialite providers
     //------------------
+    
+    
+    'selenium' => [
+        'host' => env('SELENIUM_HOST'),
+        'port' => env('SELENIUM_PORT'),
+    ],
+
+
 ];
