@@ -12,6 +12,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Chrome\ChromeOptions;
 
 
 class SeleniumLoginTest extends TestCase
@@ -25,7 +26,20 @@ protected $driver;
         $host_name = Config::get('services.selenium.host');
         $port = Config::get('services.selenium.port');
         $host = 'http://' . $host_name . ':' . $port . '/wd/hub'; // this is the default
-        $this->driver = RemoteWebDriver::create($host, DesiredCapabilities::chrome());
+
+        // options for chrome
+        $options = new ChromeOptions();
+	$options->addArguments(array(
+	    '--disable-extensions',
+	    '--headless',
+	    '--disable-gpu',
+	    '--no-sandbox',
+	    
+        ));
+	$caps = DesiredCapabilities::chrome();
+        $caps->setCapability(ChromeOptions::CAPABILITY, $options);
+    
+        $this->driver = RemoteWebDriver::create($host, $caps);
     }
     
     public function testSimple() {
