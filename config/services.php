@@ -41,7 +41,7 @@ return [
     'battlenet-stateful' => [
         'client_id' => env('Battle_net_client_id'),
         'client_secret' => env('Battle_net_client_secret'),
-        'redirect' => env('APP_URL') . ':' . env('APP_PORT') . '/' . env('Battle_net_redirect_url'),
+        'redirect' => env('APP_URL') . ':' . filter_input(INPUT_SERVER, 'SERVER_PORT') . '/' . env('Battle_net_redirect_url'),
 
         // extra -- battle.net has multiple authentication endpoints by region!
         'region' => env('Battle_net_region'),
@@ -56,5 +56,9 @@ return [
         'port' => env('SELENIUM_PORT'),
     ],
 
-
+    'battlenet-account' => [
+        'user' => env('BATTLENET_USER'),
+        'pass' => env('BATTLENET_PASS'),
+        'tagname' => env('BATTLENET_TAGNAME'),
+    ],
 ];

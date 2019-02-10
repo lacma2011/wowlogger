@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 use App\User;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\WebDriverExpectedConditions;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 
@@ -20,6 +20,8 @@ protected $driver;
 
     public function setUp() {
         parent::setUp();
+
+
         $host_name = Config::get('services.selenium.host');
         $port = Config::get('services.selenium.port');
         $host = 'http://' . $host_name . ':' . $port . '/wd/hub'; // this is the default
@@ -63,24 +65,60 @@ protected $driver;
 
     public function testBlizzardLogin()
     {
+        $driver = $this->driver;
+	$screenshot = function() use ($driver) {
+            $filename = __DIR__ . '/myfile.png';
+            $screenshot = $driver->takeScreenshot();
+            file_put_contents($filename, $screenshot);
+        };
+
         $url = route('loginsocial', [
             'provider' => 'battlenet-stateful',
             'region' => 'us',
         ]);
 
-        $this->driver->get($url);
+        $driver->get($url);
+
+        //var_dump($driver->getCurrentUrl());
 
         // checking that page title is really Blizzard's
-        $this->assertContains('Blizzard Login', $this->driver->getTitle());
+        $this->assertContains('Blizzard Login', $driver->getTitle());
 
-        
-        // TODO:
-        // enter username and password
-        // check if 2-factor auth is waiting on, and if so, get the code
-        // 
-//        $content = $this->driver->getPageSource();
-//        var_dump($content);
-//        exit;
+	$user = Config::get('services.battlenet-account.user');
+	$pass = Config:: get('services.battlenet-account.pass');
+	$tagname = Config:: get('services.battlenet-account.tagname');
+
+        $driver->findElement(WebDriverBy::id("accountName"))->sendKeys($user);
+        $driver->findElement(WebDriverBy::id("password"))->sendKeys($pass);
+	$driver->findElement(WebDriverBy::id('submit'))->click();
+
+        $element = $driver->wait()->until(
+            WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::cssSelector('h1.heading-1'))
+        );
+        $headerText = $element->getText();
+	$this->assertContains('Check your Authenticator', $headerText);
+
+	// let user know to check their authenticator
+	echo $headerText . "\n\n";
+        ob_flush();
+
+	usleep(10000000);
+        //$screenshot();
+
+        //echo "Selenium redirected to: " . $driver->getCurrentUrl() . PHP_EOL;
+
+        //$content = $driver->getPageSource();
+        //var_dump($content);
+        //ob_flush();
+
+        $driver->wait(10, 500)->until(WebDriverExpectedCondition::titleIs('User Page: ' . $tagname));
+	$this->assertContains('User Page: ' . $tagname, $this->driver->getTitle());
+
+	//$element = $driver->findElement(WebDriverBy::id('first_name'));
+        //$driver->wait(10, 1000)->until(
+            //WebDriverExpectedCondition::visibilityOf($element)
+	//);
+
     }
 
     public function tearDown() {

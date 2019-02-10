@@ -54,7 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'port' => env('APP_PORT', 80),
+    'port' => filter_input(INPUT_SERVER, 'SERVER_PORT'),
 
     /*
     |--------------------------------------------------------------------------
