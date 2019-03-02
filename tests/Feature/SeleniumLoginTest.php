@@ -17,8 +17,8 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 
 class SeleniumLoginTest extends TestCase
 {
-protected $driver;
-
+    protected $driver;
+    
     public function setUp() {
         parent::setUp();
 
@@ -42,6 +42,10 @@ protected $driver;
         $this->driver = RemoteWebDriver::create($host, $caps);
     }
     
+    /**
+     * @group online
+     * @group selenium
+     */
     public function testSimple() {
         $url = 'https://github.com';
         $this->driver->get($url);
@@ -49,6 +53,10 @@ protected $driver;
         $this->assertContains('GitHub', $this->driver->getTitle());
     }
 
+    /**
+     * @group online
+     * @group selenium
+     */
     public function testToDos() {
         try {
             print "\nNavigating to URL\n";
@@ -77,6 +85,10 @@ protected $driver;
         }
     }
 
+    /**
+     * @group online
+     * @group selenium
+     */
     public function testBlizzardLogin()
     {
         $driver = $this->driver;
